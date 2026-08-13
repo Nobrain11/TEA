@@ -1,0 +1,16 @@
+export function isValidEvmAddress(value: string) {
+  return /^0x[a-fA-F0-9]{40}$/.test(value.trim());
+}
+
+export function normalizeAddress(value: string) {
+  return value.trim();
+}
+
+export function searchMatch(input: string, token: { name?: string; symbol?: string; address: string }) {
+  const q = input.trim().toLowerCase();
+  return (
+    token.address.toLowerCase() === q ||
+    (token.name || "").toLowerCase().includes(q) ||
+    (token.symbol || "").toLowerCase().includes(q)
+  );
+}
