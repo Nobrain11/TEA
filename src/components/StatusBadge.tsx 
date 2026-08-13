@@ -1,0 +1,9 @@
+export function StatusBadge({ status }: { status: string }) {
+  const color =
+    status === "verified" ? "bg-emerald-500/20 text-emerald-300" :
+    status === "estimated" ? "bg-amber-500/20 text-amber-300" :
+    status === "stale" ? "bg-orange-500/20 text-orange-300" :
+    "bg-zinc-500/20 text-zinc-300";
+
+  return <span className={`rounded-full px-2 py-1 text-xs ${color}`}>{status.toUpperCase()}</span>;
+}
