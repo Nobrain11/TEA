@@ -1,0 +1,18 @@
+import { loadLocalWatchlist, saveLocalWatchlist } from "@/lib/storage";
+
+export function getWatchlist() {
+  return loadLocalWatchlist();
+}
+
+export function addWatchlistToken(address: string) {
+  const list = new Set(loadLocalWatchlist());
+  list.add(address);
+  saveLocalWatchlist(Array.from(list));
+  return Array.from(list);
+}
+
+export function removeWatchlistToken(address: string) {
+  const list = loadLocalWatchlist().filter((item) => item.toLowerCase() !== address.toLowerCase());
+  saveLocalWatchlist(list);
+  return list;
+}
