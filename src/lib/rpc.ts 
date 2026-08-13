@@ -1,0 +1,22 @@
+import { robinhoodChain } from "@/config/robinhoodChain";
+
+export async function rpcRequest<T>(method: string, params: unknown[] = []): Promise<T> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10000);
+
+  try {
+    const res = await fetch(robinhoodChain.rpcUrl, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ jsonrpc: "2.0", id: Date.now(), method, params }),
+      signal: controller.signal,
+    });
+
+    if (!res.ok) throw new Error(`RPC HTTP ${res.status}`);
+    const json = await res.json();
+    if (json.error) throw new Error(json.error.message || "RPC error");
+    return json.result as T;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
