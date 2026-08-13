@@ -1,0 +1,15 @@
+import { formatNumber, formatPercent, shortAddress } from "@/lib/format";
+
+describe("format helpers", () => {
+  test("short address", () => {
+    expect(shortAddress("0x1234567890abcdef1234567890abcdef12345678")).toBe("0x1234…5678");
+  });
+
+  test("format number", () => {
+    expect(formatNumber(1234.567)).toBe("1,234.57");
+  });
+
+  test("format percent", () => {
+    expect(formatPercent(3.2)).toBe("+3.20%");
+  });
+});
