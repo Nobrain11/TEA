@@ -1,0 +1,11 @@
+import { isValidEvmAddress } from "@/lib/token";
+
+describe("token utils", () => {
+  test("valid address", () => {
+    expect(isValidEvmAddress("0x1234567890abcdef1234567890abcdef12345678")).toBe(true);
+  });
+
+  test("invalid address", () => {
+    expect(isValidEvmAddress("bad")).toBe(false);
+  });
+});
