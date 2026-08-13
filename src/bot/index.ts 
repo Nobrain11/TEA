@@ -1,0 +1,9 @@
+import { getStartMessage, getLookupMessage, getPortfolioMessage } from "./commands";
+
+export function handleBotCommand(command: string, payload = "") {
+  const cmd = command.toLowerCase();
+  if (cmd === "/start") return getStartMessage();
+  if (cmd === "/portfolio") return getPortfolioMessage();
+  if (cmd === "/lookup") return getLookupMessage(payload);
+  return "Unknown command";
+}
