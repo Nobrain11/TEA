@@ -1,0 +1,20 @@
+export function shortAddress(address?: string) {
+  if (!address || address.length < 10) return address || "Unavailable";
+  return `${address.slice(0, 6)}…${address.slice(-4)}`;
+}
+
+export function formatNumber(value: number | string | null | undefined, digits = 2) {
+  if (value === null || value === undefined || value === "") return "Unavailable";
+  const n = typeof value === "string" ? Number(value) : value;
+  if (!Number.isFinite(n)) return "Unavailable";
+  return n.toLocaleString(undefined, { maximumFractionDigits: digits, minimumFractionDigits: digits });
+}
+
+export function formatPercent(value: number | null | undefined) {
+  if (value === null || value === undefined || Number.isNaN(value)) return "Unavailable";
+  return `${value >= 0 ? "+" : ""}${value.toFixed(2)}%`;
+}
+
+export function formatStatus(status: "verified" | "estimated" | "stale" | "unavailable") {
+  return status.toUpperCase();
+}
