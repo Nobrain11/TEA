@@ -1,0 +1,38 @@
+import { useEffect, useState } from "react";
+import { AppShell } from "@/components/AppShell";
+import { PortfolioPanel } from "@/components/PortfolioPanel";
+import { loadPortfolio } from "@/services/portfolioService";
+
+export default function PortfolioPage() {
+  const [portfolio, setPortfolio] = useState<any>({ positions: [], status: "unavailable" });
+
+  useEffect(() => {
+    loadPortfolio().then(setPortfolio);
+  }, []);
+
+  return (
+    <AppShell>
+      <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+        <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
+          <h1 className="text-2xl font-semibold">Portfolio</h1>
+          <div className="mt-4 text-sm text-zinc-500">
+            This build is read-only. Real balances and PnL will be added once wallet and indexed history are wired.
+          </div>
+          <div className="mt-6 space-y-3">
+            {portfolio.positions.length ? portfolio.positions.map((p: any) => (
+              <div key={p.tokenAddress} className="rounded-xl bg-zinc-950 p-4">
+                <div className="font-medium">{p.symbol || p.tokenAddress}</div>
+                <div className="text-sm text-zinc-500">Status: {p.status}</div>
+              </div>
+            )) : (
+              <div className="rounded-xl border border-dashed border-zinc-700 p-8 text-center text-zinc-500">
+                No indexed positions yet.
+              </div>
+            )}
+          </div>
+        </div>
+        <PortfolioPanel portfolio={portfolio} />
+      </div>
+    </AppShell>
+  );
+}
