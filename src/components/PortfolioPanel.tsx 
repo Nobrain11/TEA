@@ -1,0 +1,9 @@
+export function PortfolioPanel({ portfolio }: { portfolio: any }) {
+  return (
+    <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-4">
+      <h2 className="mb-3 font-semibold">Portfolio</h2>
+      <div className="text-sm text-zinc-400">Native balance: {portfolio.nativeBalance || "Unavailable"}</div>
+      <div className="mt-3 text-sm text-zinc-500">No reliable positions indexed yet.</div>
+    </div>
+  );
+}
