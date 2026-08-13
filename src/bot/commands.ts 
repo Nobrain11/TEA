@@ -1,0 +1,11 @@
+export function getStartMessage() {
+  return "Robinhood Chain Terminal bot is live in read-only mode.";
+}
+
+export function getPortfolioMessage() {
+  return "Portfolio is unavailable until wallet/portfolio indexing is connected.";
+}
+
+export function getLookupMessage(input: string) {
+  return `Lookup requested for: ${input}`;
+}
