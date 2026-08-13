@@ -1,0 +1,22 @@
+export interface PortfolioPosition {
+  tokenAddress: string;
+  symbol?: string;
+  balance?: string;
+  currentPrice?: number;
+  value?: number;
+  unrealizedPnl?: number;
+  realizedPnl?: number;
+  status: "verified" | "estimated" | "partial" | "unavailable";
+}
+
+export async function loadPortfolio(): Promise<{
+  nativeBalance?: string;
+  positions: PortfolioPosition[];
+  status: "verified" | "estimated" | "partial" | "unavailable";
+}> {
+  return {
+    nativeBalance: undefined,
+    positions: [],
+    status: "unavailable",
+  };
+}
