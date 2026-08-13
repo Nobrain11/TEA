@@ -1,0 +1,20 @@
+export const robinhoodChain = {
+  networkName: process.env.RH_NETWORK_NAME || "Robinhood Chain",
+  chainId: Number(process.env.RH_CHAIN_ID || 4663),
+  nativeSymbol: process.env.RH_NATIVE_SYMBOL || "ETH",
+  rpcUrl: process.env.RH_RPC_URL || "https://rpc.mainnet.chain.robinhood.com",
+  wsUrl: process.env.RH_WS_URL || "",
+  explorerUrl: process.env.RH_EXPLORER_URL || "https://robinhoodchain.blockscout.com",
+  explorerApiUrl: process.env.RH_EXPLORER_API_URL || "https://robinhoodchain.blockscout.com/api",
+  contracts: {
+    l2Weth: process.env.RH_L2_WETH || "0x0Bd7D308f8E1639FAb988df18A8011f41EAcAD73",
+    l2Multicall: process.env.RH_L2_MULTICALL || "0x2cAC2D899eCC914d704FeaAE33ac1bF36277DaD1",
+    permit2: process.env.RH_PERMIT2 || "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+    dexRouter: process.env.RH_DEX_ROUTER || "",
+    dexFactory: process.env.RH_DEX_FACTORY || "",
+    dexQuoter: process.env.RH_DEX_QUOTER || "",
+  },
+  tradingBlocked: true,
+} as const;
+
+export type RobinhoodChainConfig = typeof robinhoodChain;
