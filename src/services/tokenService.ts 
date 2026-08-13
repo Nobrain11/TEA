@@ -1,0 +1,32 @@
+import { isValidEvmAddress } from "@/lib/token";
+
+export type TokenStatus = "verified" | "estimated" | "stale" | "unavailable";
+
+export interface TokenData {
+  address: string;
+  name?: string;
+  symbol?: string;
+  decimals?: number;
+  price?: number;
+  liquidity?: number;
+  volume24h?: number;
+  marketCap?: number;
+  status: TokenStatus;
+  updatedAt: string;
+}
+
+export async function fetchTokenByAddress(address: string): Promise<TokenData> {
+  if (!isValidEvmAddress(address)) throw new Error("Invalid token address");
+  return {
+    address,
+    name: "Unavailable",
+    symbol: "Unavailable",
+    decimals: undefined,
+    price: undefined,
+    liquidity: undefined,
+    volume24h: undefined,
+    marketCap: undefined,
+    status: "unavailable",
+    updatedAt: new Date().toISOString(),
+  };
+}
