@@ -1,0 +1,19 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+import { isValidEvmAddress } from "@/lib/token";
+import { fetchTokenByAddress } from "@/services/tokenService";
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    const q = String(req.query.q || "").trim();
+    if (!q) return res.status(200).json({ tokens: [] });
+
+    if (isValidEvmAddress(q)) {
+      const token = await fetchTokenByAddress(q);
+      return res.status(200).json({ tokens: [token] });
+    }
+
+    return res.status(200).json({ tokens: [] });
+  } catch (error: any) {
+    res.status(400).json({ error: error?.message || "Search failed" });
+  }
+}
