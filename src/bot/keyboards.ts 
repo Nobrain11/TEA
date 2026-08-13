@@ -1,0 +1,10 @@
+export const mainKeyboard = [
+  ["LOOKUP", "PORTFOLIO"],
+  ["WATCHLIST", "SETTINGS"],
+] as const;
+
+export const tokenKeyboard = [
+  ["BUY", "SELL"],
+  ["CHART", "OPEN EXPLORER"],
+  ["WATCHLIST"],
+] as const;
