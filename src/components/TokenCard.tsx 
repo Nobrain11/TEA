@@ -1,0 +1,23 @@
+import Link from "next/link";
+import { StatusBadge } from "./StatusBadge";
+import { shortAddress, formatNumber } from "@/lib/format";
+
+export function TokenCard({ token }: { token: any }) {
+  return (
+    <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <div className="text-lg font-semibold">{token.symbol || "Unavailable"}</div>
+          <div className="text-sm text-zinc-400">{token.name || "Unavailable"}</div>
+        </div>
+        <StatusBadge status={token.status || "unavailable"} />
+      </div>
+      <div className="mt-3 text-sm text-zinc-400">Address: {shortAddress(token.address)}</div>
+      <div className="mt-2 text-sm">Price: ${formatNumber(token.price)}</div>
+      <div className="mt-2 text-sm">Liquidity: ${formatNumber(token.liquidity)}</div>
+      <div className="mt-4">
+        <Link className="text-teal-400" href={`/token/${token.address}`}>Open token</Link>
+      </div>
+    </div>
+  );
+}
